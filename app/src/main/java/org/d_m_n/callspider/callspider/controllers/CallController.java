@@ -36,13 +36,15 @@ public final class CallController {
 
 
     public static final void endCall(Context context, long delay){
-        sHandler.postDelayed(() -> {
+        sHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 try {
                     CallController.disconnectCall("");
                 } catch (Exception e) {
                     Logger.e(TAG, "endCall error = " + e.toString());
                 }
-
+            }
         }, delay < MIN_SEC_DELAY ? MIN_SEC_DELAY : delay);
     }
 

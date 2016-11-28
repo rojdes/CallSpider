@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.managers.ContactsManager;
+import org.d_m_n.callspider.callspider.managers.PreferencesManager;
 import org.d_m_n.callspider.callspider.tools.ContactTools;
 import org.d_m_n.callspider.callspider.ui.adapters.ContactListAdapter;
 
@@ -41,7 +42,7 @@ public class ContactListFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.frg_contact_list, container,false);
-        ButterKnife.setDebug(true);
+
         ButterKnife.bind(this,rootView);
         return rootView;
     }
@@ -50,7 +51,7 @@ public class ContactListFragment extends BaseFragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         boolean isFirstStart = true;
-        setContactList(isFirstStart);
+        setContactList(PreferencesManager.isFirstLaunched(getActivity()));
     }
 
     private void setContactList(boolean isFirstStart) {
@@ -66,5 +67,11 @@ public class ContactListFragment extends BaseFragment{
         mrvContactList.setAdapter(mContactListAdapter);
 
 
+    }
+
+    @Override
+    public void updateData() {
+        super.updateData();
+        ContactsManager.with(getActivity()).updateContacts();
     }
 }

@@ -31,7 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try
         {
-            TableUtils.createTable(connectionSource, ContactDao.class);
+            TableUtils.createTable(connectionSource, ContactDb.class);
         }
         catch (SQLException e){
             Log.e(TAG, "error creating DB " + DB_NAME);
@@ -62,6 +62,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         } catch (SQLException e){
             Log.e(TAG, "getContactDaoWrapException " + e);
             return null;
+        }
+    }
+
+    public boolean clearContactsTable() {
+        try {
+            TableUtils.clearTable(getConnectionSource(), ContactDao.class);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

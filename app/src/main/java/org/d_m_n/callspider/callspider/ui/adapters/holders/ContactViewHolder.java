@@ -24,6 +24,7 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
     public TextView contactNumber;
 
 
+    @BindView(R.id.iv_item_contact_category_item_icon)
     public ImageView contactCategoryIcon;
 
     @BindView(R.id.iv_item_contact_category_item_direction)
@@ -31,7 +32,7 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
 
     public ContactViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(itemView);
+        ButterKnife.bind(this,itemView);
     }
 
 }

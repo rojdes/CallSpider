@@ -7,18 +7,12 @@
     android:background="@android:color/white">
 
 
-    <ImageView
-        android:id="@+id/iv_item_contact_category_item_direction"
-        android:layout_width="@dimen/iv_item_contact_category_size"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_toRightOf="@+id/iv_item_contact_category_item_direction"
+        android:layout_toRightOf="@+id/iv_item_contact_category_item_icon"
+        android:layout_toLeftOf="@+id/iv_item_contact_category_item_direction"
         android:weightSum="2">
 
         <TextView
@@ -48,5 +42,19 @@
             android:layout_marginTop="@dimen/item_contact_list_space_small"
             android:textSize="@dimen/tv_item_contact_list_number_textsize" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_item_contact_category_item_direction"
+        android:layout_width="@dimen/iv_item_contact_category_size"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/iv_item_contact_category_item_icon"
+        android:layout_width="@dimen/iv_item_contact_category_size"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/iv_item_contact_category_item_direction"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

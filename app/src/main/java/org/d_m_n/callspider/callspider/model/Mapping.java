@@ -9,11 +9,11 @@ import java.util.List;
 
 public final class Mapping {
 
-    public static AppContact from(ContactDb model) {
+    public static CommonContact from(ContactDb model) {
         if (model == null) {
             return null;
         }
-        AppContact cm = new AppContact(ContactCategory.valueOf(model.getCategory()));
+        CommonContact cm = new CommonContact(ContactCategory.valueOf(model.getCategory()));
         cm.contactId = model.getContactId();
         cm.number = model.getNumber();
         cm.direction = ContactCallForbidDirection.valueOf(model.getDirection());
@@ -21,7 +21,7 @@ public final class Mapping {
         return cm;
     }
 
-    public static ContactDb from(AppContact model){
+    public static ContactDb from(CommonContact model){
         if (model == null) {
             return null;
         }
@@ -34,11 +34,11 @@ public final class Mapping {
         return dbModel;
     }
 
-    public static ArrayList<AppContact> from(List<ContactDb> contacts){
+    public static ArrayList<CommonContact> from(List<ContactDb> contacts){
         if(contacts == null){
             return null;
         }
-        ArrayList<AppContact> cc = new ArrayList<>();
+        ArrayList<CommonContact> cc = new ArrayList<>();
         for(ContactDb c:contacts){
             cc.add(from(c));
         }

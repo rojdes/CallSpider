@@ -25,6 +25,8 @@ public class CallReceiver extends BroadcastReceiver {
             return;
         }
 
+        //Try to start stopping call repeatedly in service until receiving IDLE with the same number.Then send this event to stop loop
+
         String action = null;
 
         if (CallBroadcastHandler.isRinging(intent)) {

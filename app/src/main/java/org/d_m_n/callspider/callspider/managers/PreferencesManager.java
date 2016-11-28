@@ -16,7 +16,9 @@ public final class PreferencesManager {
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor editor;
 
-    private static final String ALREADY_LAUNCHED = "already_launched";
+    private static final String FIRST_LAUNCHED = "already_launched";
+    private static final String CONTACT_COPIED = "contacts_copied";
+
     private static final String CONTAINS_SELECTED_CONTACTS = "was_selected";
 
 
@@ -30,12 +32,27 @@ public final class PreferencesManager {
 
     public static void setFirstLaunched(@NonNull Context context){
         initPrefInstanceIfNeeded(context);
-        editor.putBoolean(ALREADY_LAUNCHED, true).apply();
+        editor.putBoolean(FIRST_LAUNCHED, true).apply();
     }
 
     public static boolean isFirstLaunched(@NonNull Context context){
        initPrefInstanceIfNeeded(context);
-        return prefs.getBoolean(ALREADY_LAUNCHED, false);
+        return prefs.getBoolean(FIRST_LAUNCHED, false);
+    }
+
+    public static void setContactsCopied(@NonNull Context context){
+        initPrefInstanceIfNeeded(context);
+        editor.putBoolean(CONTACT_COPIED, true).apply();
+    }
+
+    public static void resetContactsCopied(@NonNull Context context){
+        initPrefInstanceIfNeeded(context);
+        editor.putBoolean(CONTACT_COPIED, false).apply();
+    }
+
+    public static boolean isContactsCopied(@NonNull Context context){
+        initPrefInstanceIfNeeded(context);
+        return prefs.getBoolean(FIRST_LAUNCHED, false);
     }
 
     public static void setContactsWereSelected(@NonNull Context context){

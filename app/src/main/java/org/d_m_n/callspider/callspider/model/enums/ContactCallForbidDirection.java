@@ -8,6 +8,6 @@ public enum ContactCallForbidDirection {
 
     INCOMING,
     OUTGOING,
-    FULL
+    FREE, FULL
 
 }

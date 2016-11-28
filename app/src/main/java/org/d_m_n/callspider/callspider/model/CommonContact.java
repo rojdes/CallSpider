@@ -3,20 +3,27 @@ package org.d_m_n.callspider.callspider.model;
 import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 
+/**
+ * Created by d1m11n on 11/17/16.
+ */
 
-//TODO: RENAME CLASSNAME
-public class AppContact extends NativeContact{
+public class CommonContact {
 
 
-
-    public AppContact(ContactCategory category){
-        super();
-        this.category = category;
-    }
 
     public ContactCallForbidDirection direction;
 
     public long contactId;
+
+    public ContactCategory category = ContactCategory.NATIVE;
+
+    public String number;
+
+    public String name;
+
+    public CommonContact(ContactCategory category){
+        this.category = category;
+    }
 
 
 }

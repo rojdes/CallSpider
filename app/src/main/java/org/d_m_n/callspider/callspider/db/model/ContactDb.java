@@ -14,7 +14,7 @@ public class ContactDb {
     @DatabaseField
     private String name;
 
-    @DatabaseField
+    @DatabaseField(id = true)
     private long contactId;
 
     @DatabaseField
@@ -25,6 +25,10 @@ public class ContactDb {
 
     @DatabaseField
     private String direction;
+
+    public ContactDb(){
+
+    }
 
     public String getName() {
         return name;

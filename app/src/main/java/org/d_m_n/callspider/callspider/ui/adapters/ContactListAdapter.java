@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.d_m_n.callspider.callspider.R;
-import org.d_m_n.callspider.callspider.model.AppContact;
+import org.d_m_n.callspider.callspider.model.CommonContact;
 import org.d_m_n.callspider.callspider.tools.ContactTools;
 import org.d_m_n.callspider.callspider.ui.adapters.holders.ContactViewHolder;
 
@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
 
-    private ArrayList<AppContact> contacts;
+    private ArrayList<CommonContact> contacts;
 
-    public ContactListAdapter(ArrayList<AppContact> contacts){
+    public ContactListAdapter(ArrayList<CommonContact> contacts){
         this.contacts =contacts;
     }
 
@@ -37,9 +37,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
 
     @Override
     public void onBindViewHolder(ContactViewHolder holder, int position) {
-        AppContact contact = contacts.get(position);
-        holder.contactName.setText(contact.name);
-        holder.contactNumber.setText(contact.number);
+        CommonContact contact = contacts.get(position);
+        holder.contactName.setText(String.valueOf(contact.name));
+        holder.contactNumber.setText(String.valueOf(contact.number));
         holder.contactCategoryIcon.setImageDrawable(ContactTools.getContactDirectionDrawable(holder.contactCategoryIcon.getContext(), contact.direction));
     }
 
