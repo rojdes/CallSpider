@@ -34,7 +34,6 @@ public class CallHandlerService extends IntentService {
         }
         if (intent.getAction().equals(Constants.Actions.CALL_OFFHOOK)){
             handleOffhook2(intent);
-//            handleOffhook(intent);
             return;
         }
         if (intent.getAction().equals(Constants.Actions.CALL_RINGING)){
@@ -42,22 +41,6 @@ public class CallHandlerService extends IntentService {
             return;
         }
     }
-
-//    private void handleOffhook(@NonNull Intent intent) {
-//        Logger.e(TAG,"handle offhook");
-//        try {
-//            CallController.endCall(this);
-//        } catch (ClassNotFoundException e) {
-//            Logger.e(TAG, "classnotfound " + e.toString());
-//        } catch (NoSuchMethodException e) {
-//            Logger.e(TAG, "nosuchmethod " + e.toString());
-//        } catch (InvocationTargetException e) {
-//            Logger.e(TAG, "invocationtarget " + e.toString());
-//        } catch (IllegalAccessException e) {
-//            Logger.e(TAG, "illegalaccess " + e.toString());
-//        }
-//
-//    }
 
     private void handleOffhook2(@NonNull Intent intent) {
         Logger.e(TAG,"handle offhook2");
@@ -69,19 +52,4 @@ public class CallHandlerService extends IntentService {
 
 
     }
-
-//    private void handleRinging(@NonNull Intent intent) {
-//        Logger.e(TAG,"handle ringing");
-//        try {
-//            CallController.endCall(this, 2000L);
-//        } catch (ClassNotFoundException e) {
-//            Logger.e(TAG, "classnotfound " + e.toString());
-//        } catch (NoSuchMethodException e) {
-//            Logger.e(TAG, "nosuchmethod " + e.toString());
-//        } catch (InvocationTargetException e) {
-//            Logger.e(TAG, "invocationtarget " + e.toString());
-//        } catch (IllegalAccessException e) {
-//            Logger.e(TAG, "illegalaccess " + e.toString());
-//        }
-//    }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CallSpider</string>
+    <string name="verify_permissions_error">Permissions error</string>
 </resources>
