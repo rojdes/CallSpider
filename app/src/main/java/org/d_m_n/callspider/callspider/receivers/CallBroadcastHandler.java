@@ -52,7 +52,7 @@ class CallBroadcastHandler {
         return false;
     }
 
-    static String getIncomingNumber(@NonNull Intent intent){
+    static String getCallNumber(@NonNull Intent intent){
         if( !intent.hasExtra(WHAT_INCOMING_NUMBER)) {
             return UNKNOWN_NUMBER;
         }
@@ -76,7 +76,7 @@ class CallBroadcastHandler {
             b.append("idle ");
         }
 
-        b.append(getIncomingNumber(intent));
+        b.append(getCallNumber(intent));
         Logger.w(TAG,"CALL : "+ b.toString());
     }
 }

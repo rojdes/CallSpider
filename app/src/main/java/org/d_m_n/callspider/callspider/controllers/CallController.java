@@ -25,6 +25,11 @@ public final class CallController {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
+    public static interface CallEndCallback{
+
+        public void  onEndCall(boolean isSuccessfull);
+    }
+
     private static final void endCall(Context context) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         Class clazz = Class.forName(telephonyManager.getClass().getName());
@@ -35,14 +40,20 @@ public final class CallController {
     }
 
 
-    public static final void endCall(Context context, long delay){
+    public static final void endCall(long delay, final CallEndCallback callback){
         sHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 try {
                     CallController.disconnectCall("");
+                    if (callback != null){
+                        callback.onEndCall(true);
+                    }
                 } catch (Exception e) {
                     Logger.e(TAG, "endCall error = " + e.toString());
+                    if (callback != null){
+                        callback.onEndCall(false);
+                    }
                 }
             }
         }, delay < MIN_SEC_DELAY ? MIN_SEC_DELAY : delay);

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CallSpider</string>
     <string name="verify_permissions_error">Permissions error</string>
+    <string name="call_was_blocked">Call %1$s was blocked</string>
 </resources>

@@ -13,9 +13,9 @@ import org.d_m_n.callspider.callspider.services.CallHandlerService;
  * Created by d1m11n on 11/11/16.
  */
 
-public class CallReceiver extends BroadcastReceiver {
+public class CallBroadcastReceiver extends BroadcastReceiver {
 
-    private static final String TAG = CallReceiver.class.getSimpleName();
+    private static final String TAG = CallBroadcastReceiver.class.getSimpleName();
 
 
     @Override
@@ -33,20 +33,14 @@ public class CallReceiver extends BroadcastReceiver {
             action = Constants.Actions.CALL_RINGING;
             // Ringing state
             // This code will execute when the phone has an incoming call
-            Logger.e(TAG, "number = " + CallBroadcastHandler.getIncomingNumber(intent));
+            Logger.e(TAG, "number = " + CallBroadcastHandler.getCallNumber(intent));
         }
 
         if (CallBroadcastHandler.isOffhook(intent)) {
             // This code will execute when the call is answered or disconnected
             action = Constants.Actions.CALL_OFFHOOK;
         }
-        String phoneNumber = getResultData();
-        if (phoneNumber == null) {
-            // No reformatted number, use the original
-            phoneNumber = CallBroadcastHandler.getIncomingNumber(intent);
-        }
-        setResultData(null);
-        notifyServiceAboutCall(action,phoneNumber);
+        notifyServiceAboutCall(action,CallBroadcastHandler.getCallNumber(intent));
     }
 
     private void notifyServiceAboutCall(String action, String number){
