@@ -1,17 +1,14 @@
 package org.d_m_n.callspider.callspider.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.MainApp;
 import org.d_m_n.callspider.callspider.managers.ContactsManager;
 import org.d_m_n.callspider.callspider.model.CommonContact;
 import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
 import org.d_m_n.callspider.callspider.ui.adapters.holders.ContactViewHolder;
-import org.d_m_n.callspider.callspider.ui.views.DirectionSelectView;
+import org.d_m_n.callspider.callspider.ui.views.ItemContactView;
 
 import java.util.ArrayList;
 
@@ -29,7 +26,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.itm_contact_list, parent,false);
+        ItemContactView rootView = new ItemContactView(parent.getContext());
         return new ContactViewHolder(rootView);
     }
 
@@ -41,23 +38,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
     @Override
     public void onBindViewHolder(final ContactViewHolder holder, int position) {
         final CommonContact contact = contacts.get(position);
-        holder.tvContactName.setText(String.valueOf(contact.name));
-        holder.tvContactNumber.setText(String.valueOf(contact.number));
-        holder.ivContactDirection.setImageDrawable(contact.direction.getDrawable(holder.ivContactDirection.getContext()));
-        holder.lltDirectionSelect.hideItem(contact.direction);
-        holder.lltDirectionSelect.hide();
-        holder.ivContactDirection.setOnClickListener(new View.OnClickListener() {
+        holder.cstmItemContactView.setContact(contact);
+        holder.cstmItemContactView.setItemClickListener(new ItemContactView.ItemContactClickListener() {
+
             @Override
-            public void onClick(View v) {
-                holder.lltDirectionSelect.toggleVisibility();
-            }
-        });
-        holder.lltDirectionSelect.setItemClickListener(new DirectionSelectView.DirectionClickListener() {
-            @Override
-            public void onDirectionClick(ContactCallForbidDirection d) {
-                contact.direction = d;
-                holder.ivContactDirection.setImageDrawable(d.getDrawable(holder.ivContactDirection.getContext()));
-                holder.lltDirectionSelect.hide();
+            public void onDirectionChanged(ContactCallForbidDirection d) {
+                //TODO verify if direction was changed
                 ContactsManager.with(MainApp.getAppContext()).updateContact(contact);
             }
         });
