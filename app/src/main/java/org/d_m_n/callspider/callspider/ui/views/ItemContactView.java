@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,6 +22,9 @@ import butterknife.ButterKnife;
  */
 
 public class ItemContactView extends RelativeLayout implements View.OnClickListener {
+
+    private static final int ANIMATION_OFFSET = 10;
+    private static final long ANIMATION_DURATION = 300;
 
     public interface ItemContactClickListener{
 
@@ -90,7 +92,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         ivContactDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lltDirectionContact.getVisibility() == GONE)
+                if (lltDirectionContact.getVisibility() == INVISIBLE)
                     showSelectDirection();
                 else
                     hideSelectDirection();
@@ -160,23 +162,20 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         ivContactDirection.setImageDrawable(d.getDrawable(ivContactDirection.getContext()));
     }
 
-    public void toggleVisibility() {
-        setVisibility(isVisible() ? GONE : VISIBLE);
-    }
-
     public void hideSelectDirection(){
         ObjectAnimator mover = ObjectAnimator.ofFloat(rltContactInfo,
-                "translationX", -550f, 0F);
-        mover.setDuration(400);
+                View.TRANSLATION_X, -(lltDirectionContact.getWidth() + ANIMATION_OFFSET), 0F);
+        mover.setDuration(ANIMATION_DURATION);
         mover.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                ivContactDirection.setVisibility(GONE);
+                ivContactDirection.setEnabled(false);
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                ivContactDirection.setVisibility(VISIBLE);
+                ivContactDirection.setEnabled(true);
+                lltDirectionContact.setVisibility(INVISIBLE);
             }
 
             @Override
@@ -190,24 +189,22 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
             }
         });
         mover.start();
-        lltDirectionContact.setVisibility(GONE);
-
     }
 
     public void showSelectDirection(){
         lltDirectionContact.setVisibility(VISIBLE);
         ObjectAnimator mover = ObjectAnimator.ofFloat(rltContactInfo,
-                "translationX", 0F, -550f);
-        mover.setDuration(400);
+                View.TRANSLATION_X, 0F, -(lltDirectionContact.getWidth() + ANIMATION_OFFSET));
+        mover.setDuration(ANIMATION_DURATION);
         mover.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                ivContactDirection.setVisibility(GONE);
+                ivContactDirection.setEnabled(false);
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                ivContactDirection.setVisibility(VISIBLE);
+                ivContactDirection.setEnabled(true);
             }
 
             @Override
@@ -221,10 +218,6 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
             }
         });
         mover.start();
-    }
-
-    public boolean isVisible(){
-        return getVisibility() == VISIBLE;
     }
 
     public void setItemClickListener(ItemContactClickListener onClickListener) {
