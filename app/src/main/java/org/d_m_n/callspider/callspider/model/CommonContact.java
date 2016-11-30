@@ -26,4 +26,14 @@ public class CommonContact {
     }
 
 
+    @Override
+    public String toString() {
+        return "CommonContact{" +
+                "direction=" + direction +
+                ", contactId=" + contactId +
+                ", category=" + category +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,5 @@
 package org.d_m_n.callspider.callspider.ui.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +11,7 @@ import android.widget.ProgressBar;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.managers.ContactsManager;
-import org.d_m_n.callspider.callspider.managers.PreferencesManager;
-import org.d_m_n.callspider.callspider.tools.ContactTools;
+import org.d_m_n.callspider.callspider.managers.PermissionManager;
 import org.d_m_n.callspider.callspider.ui.adapters.ContactListAdapter;
 
 import butterknife.BindView;
@@ -46,7 +44,6 @@ public class ContactListFragment extends BaseFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView =inflater.inflate(R.layout.frg_contact_list, container,false);
-
         ButterKnife.bind(this,rootView);
         return rootView;
     }
@@ -54,28 +51,23 @@ public class ContactListFragment extends BaseFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        boolean isFirstStart = true;
-        setContactList(PreferencesManager.isFirstLaunched(getActivity()));
+        setContactList();
     }
 
-    private void setContactList(boolean isFirstStart) {
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+    private void setContactList() {
         mrvContactList.setHasFixedSize(true);
-
-
         mLayoutManager = new LinearLayoutManager(getActivity());
         mrvContactList.setLayoutManager(mLayoutManager);
-        mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getContacts());
-        mrvContactList.setAdapter(mContactListAdapter);
-
-
+        if (PermissionManager.isPhonePermissionGranted(getActivity())) {
+            mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getContacts());
+            mrvContactList.setAdapter(mContactListAdapter);
+        }
     }
 
     @Override
     public void updateData() {
         super.updateData();
         ContactsManager.with(getActivity()).updateContacts();
+        setContactList();
     }
 }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.managers.PermissionManager;
-import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
 import org.d_m_n.callspider.callspider.ui.fragments.BaseFragment;
 import org.d_m_n.callspider.callspider.ui.fragments.ContactListFragment;
 
@@ -19,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (!PermissionManager.isPhonePermissionGranted(this) || !PermissionManager.isContactsPermissionsGranted(this)){
+            PermissionManager.askPhoneStatePermission(this, ACTIVITY_PERMISSION_REQUEST);
+        }
         setNewFragment(ContactListFragment.newInstance());
     }
 
@@ -30,18 +32,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!PermissionManager.isPhonePermissionGranted(this)){
-            PermissionManager.askPhoneStatePermission(this, ACTIVITY_PERMISSION_REQUEST);
-        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == ACTIVITY_PERMISSION_REQUEST &&
-          PermissionManager.isPhonePermissionsRequestGranted(grantResults)){
-            UserNotifyManager.showToast(this, R.string.verify_permissions_error,true);
+        if (requestCode == ACTIVITY_PERMISSION_REQUEST){
+            PermissionManager.handlePermissionRequest(MainActivity.this, permissions, grantResults);
+            mActualFragment.updateData();
             return;
         }
+
+
 
     }
 }
