@@ -98,7 +98,7 @@ public class ContactsManager {
             c.setContactId(Long.parseLong(n.id));
             c.setName(n.name);
             c.setNumber(n.number);
-            c.setDirection(ContactCallForbidDirection.FREE.toString());
+            c.setDirection(ContactCallForbidDirection.NOT_SET.toString());
             cc.add(c);
         }
         Logger.e(TAG, "cc" + cc.size());

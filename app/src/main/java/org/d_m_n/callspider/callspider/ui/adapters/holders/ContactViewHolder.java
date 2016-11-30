@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.d_m_n.callspider.callspider.R;
+import org.d_m_n.callspider.callspider.ui.views.DirectionSelectView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,17 +19,20 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
 
 
     @BindView(R.id.tv_item_contact_list_name)
-    public TextView contactName;
+    public TextView tvContactName;
 
     @BindView(R.id.tv_item_contact_list_number)
-    public TextView contactNumber;
+    public TextView tvContactNumber;
 
 
     @BindView(R.id.iv_item_contact_category_item_icon)
-    public ImageView contactCategoryIcon;
+    public ImageView ivContactCategoryIcon;
 
     @BindView(R.id.iv_item_contact_category_item_direction)
-    public ImageView contactDirection;
+    public ImageView ivContactDirection;
+
+    @BindView(R.id.llt_item_contact_category_direction_select)
+    public DirectionSelectView lltDirectionSelect;
 
     public ContactViewHolder(View itemView) {
         super(itemView);

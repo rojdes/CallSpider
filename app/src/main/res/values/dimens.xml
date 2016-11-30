@@ -8,6 +8,6 @@
     <dimen name="iv_item_contact_category_size">40dp</dimen>
     <dimen name="item_contact_list_space">4dp</dimen>
     <dimen name="item_contact_list_space_small">2dp</dimen>
-    <dimen name="tv_item_contact_list_name_textsize">14dp</dimen>
+    <dimen name="tv_item_contact_list_name_textsize">18dp</dimen>
     <dimen name="tv_item_contact_list_number_textsize">12dp</dimen>
 </resources>

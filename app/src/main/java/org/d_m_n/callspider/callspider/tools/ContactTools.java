@@ -55,16 +55,5 @@ public final class ContactTools {
         return allContacts;
     }
 
-    public static Drawable getContactDirectionDrawable(@NonNull Context context, @NonNull ContactCallForbidDirection direction){
-        switch (direction){
-            case INCOMING:
-                //ContextCompat.getDrawable(context, R.drawable.);
-                break;
-            case OUTGOING:
-                break;
-            case FULL:
-                break;
-        }
-        return null;
-    }
+
 }
