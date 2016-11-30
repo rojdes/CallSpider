@@ -1,6 +1,7 @@
 package org.d_m_n.callspider.callspider.managers;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import org.d_m_n.callspider.callspider.app.Logger;
 import org.d_m_n.callspider.callspider.db.DatabaseHelper;
@@ -50,6 +51,36 @@ public class ContactsManager {
         }
     }
 
+    public boolean updateContact(CommonContact contact){
+        if(contact == null){
+            Logger.e(TAG, " update contact; contact is null");
+            return false;
+        }
+        try {
+            dbHelper.getContactDao().update(Mapping.from(contact));
+            return true;
+        } catch (SQLException e) {
+            Logger.e(TAG, "updateContact " +e.toString());
+            return false;
+        }
+    }
+
+    public CommonContact getContactBy(String number){
+        if (TextUtils.isEmpty(number)){
+            return null;
+        }
+        try {
+            List<ContactDb> ll= dbHelper.getContactDao().queryForEq("number", number);
+            if(ll != null) {
+                return Mapping.from(ll.get(0));
+            }
+        } catch (SQLException e) {
+            Logger.e(TAG, "getContactBy " +e.toString());
+            return null;
+        }
+        return null;
+    }
+
     public void resetContacts() {
         fillContactsWrapEception(true);
     }
@@ -73,6 +104,7 @@ public class ContactsManager {
             return;
         }
         if (!keepOld) {
+            //TODO Verify if needed clear here
             //dbHelper.clearContactsTable();
             for (ContactDb c : convertFrom(ContactTools.getNativeContacts(mContext)))
                 dbHelper.getContactDao().createOrUpdate(c);

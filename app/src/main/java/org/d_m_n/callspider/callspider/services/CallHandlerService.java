@@ -10,10 +10,11 @@ import org.d_m_n.callspider.callspider.app.Constants;
 import org.d_m_n.callspider.callspider.app.Logger;
 import org.d_m_n.callspider.callspider.app.MainApp;
 import org.d_m_n.callspider.callspider.controllers.CallController;
+import org.d_m_n.callspider.callspider.managers.ContactsManager;
 import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
+import org.d_m_n.callspider.callspider.model.CommonContact;
 import org.d_m_n.callspider.callspider.ui.MainActivity;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 /**
@@ -38,24 +39,39 @@ public class CallHandlerService extends IntentService {
         if (intent == null){
             return;
         }
-        if (intent.getAction().equals(Constants.Actions.CALL_OFFHOOK)){ //New OUTGOING CALL
-            handleOffhook2(intent);
-            return;
-        }
-        if (intent.getAction().equals(Constants.Actions.CALL_RINGING)){
-            handleOffhook2(intent);
-            return;
+        String number = intent.getStringExtra(Constants.Extras.NUMBER);
+        if (isNeedEndCall(intent, number)) {
+            endCall(number);
         }
     }
 
-    private void handleOffhook2(@NonNull final Intent intent) {
-        Logger.e(TAG,"handle offhook2");
+    private boolean isNeedEndCall(Intent intent, String number){
+        CommonContact cc= ContactsManager.with(this).getContactBy(number);
+        Logger.e(TAG, "isNeedEndCall = " + String.valueOf(cc) + " " + " number = " +number);
+        if(cc == null){
+            return false;
+        }
+        switch (cc.direction){
+            case FULL:
+                return true;
+            case INCOMING:
+                return intent.getAction().equals(Constants.Actions.CALL_RINGING);
+            case OUTGOING:
+                return intent.getAction().equals(Constants.Actions.CALL_OFFHOOK);
+            case NOT_SET:
+            default:
+                return false;
+        }
+    }
+
+    private void endCall(@NonNull final String number) {
+        Logger.e(TAG,"handle endCall " + number);
         try {
             CallController.endCall(3000L, new CallController.CallEndCallback() {
                 @Override
                 public void onEndCall(boolean isSuccessfull) {
                     Resources res = MainApp.getAppContext().getResources();
-                    String number = intent.getStringExtra(Constants.Extras.NUMBER);
+
                     UserNotifyManager.showNotification(CallHandlerService.this,
                             res.getString(R.string.app_name),
                             String.format(Locale.ENGLISH, res.getString(R.string.call_was_blocked), number),
@@ -64,7 +80,7 @@ public class CallHandlerService extends IntentService {
             });
 
         } catch (Exception e) {
-            Logger.e(TAG, "handle offhook 2 error = " + e.toString());
+            Logger.e(TAG, "handle endCall error = " + e.toString());
         }
 
 

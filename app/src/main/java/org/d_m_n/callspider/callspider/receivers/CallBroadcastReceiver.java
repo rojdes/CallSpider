@@ -40,6 +40,9 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
             // This code will execute when the call is answered or disconnected
             action = Constants.Actions.CALL_OFFHOOK;
         }
+        if(CallBroadcastHandler.isIdle(intent)) {
+            action = Constants.Actions.CALL_IDLE;
+        }
         notifyServiceAboutCall(action,CallBroadcastHandler.getCallNumber(intent));
     }
 

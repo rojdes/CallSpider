@@ -22,8 +22,8 @@ public class UserNotifyManager {
 
     private static int notificationId =10500;
 
-    public static void showToast(Activity activity, int stringId, boolean isLong) {
-        Toast toast = Toast.makeText(activity, stringId, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+    public static void showToast(Context context, int stringId, boolean isLong) {
+        Toast toast = Toast.makeText(context, stringId, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

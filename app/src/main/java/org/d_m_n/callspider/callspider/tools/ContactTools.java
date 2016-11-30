@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
 import org.d_m_n.callspider.callspider.R;
+import org.d_m_n.callspider.callspider.managers.PermissionManager;
+import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
 import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
 
 import java.util.ArrayList;
@@ -30,6 +32,12 @@ public final class ContactTools {
     public static ArrayList<NativeContact> getNativeContacts(Context context) {
         if (context == null) {
             return null;
+        }
+        //TODO move verification upper
+        if(!PermissionManager.isPhonePermissionGranted(context)){
+            UserNotifyManager.showToast(context, R.string.verify_permissions_error, true);
+            return null;
+
         }
         ArrayList<NativeContact> allContacts = new ArrayList<>();
         ContentResolver cr = context.getContentResolver();
