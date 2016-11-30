@@ -1,5 +1,7 @@
 package org.d_m_n.callspider.callspider.ui.views;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -88,7 +90,10 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         ivContactDirection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showSelectDirection();
+                if (lltDirectionContact.getVisibility() == GONE)
+                    showSelectDirection();
+                else
+                    hideSelectDirection();
             }
         });
     }
@@ -118,6 +123,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
     private void handleDirectionClick(ContactCallForbidDirection d) {
         hideItem(d);
         setContactDirection(d);
+        hideSelectDirection();
         if(clickListener != null){
             clickListener.onDirectionChanged(d);
         }
@@ -146,6 +152,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         tvContactName.setText(String.valueOf(contact.name));
         tvContactNumber.setText(String.valueOf(contact.number));
         setContactDirection(contact.direction);
+        hideItem(contact.direction);
     }
 
     public void setContactDirection(ContactCallForbidDirection d){
@@ -158,11 +165,62 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
     }
 
     public void hideSelectDirection(){
+        ObjectAnimator mover = ObjectAnimator.ofFloat(rltContactInfo,
+                "translationX", -550f, 0F);
+        mover.setDuration(400);
+        mover.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                ivContactDirection.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ivContactDirection.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        mover.start();
         lltDirectionContact.setVisibility(GONE);
+
     }
 
     public void showSelectDirection(){
         lltDirectionContact.setVisibility(VISIBLE);
+        ObjectAnimator mover = ObjectAnimator.ofFloat(rltContactInfo,
+                "translationX", 0F, -550f);
+        mover.setDuration(400);
+        mover.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                ivContactDirection.setVisibility(GONE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ivContactDirection.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        mover.start();
     }
 
     public boolean isVisible(){

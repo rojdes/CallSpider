@@ -2,4 +2,6 @@
     <string name="app_name">CallSpider</string>
     <string name="verify_permissions_error">Permissions error</string>
     <string name="call_was_blocked">Call %1$s was blocked</string>
+    <string name="blocking_call_error">Call %1$s was not blocked. Error is %2$s</string>
+
 </resources>

@@ -28,6 +28,12 @@ public class UserNotifyManager {
         toast.show();
     }
 
+    public static void showToast(Context context, String string, boolean isLong) {
+        Toast toast = Toast.makeText(context, string, isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     public static void showSnackbar(View parent, int messageStringId, int actionStringId, boolean isLong, View.OnClickListener listener){
         Snackbar.make(parent, messageStringId, isLong ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT)
                 .setAction(actionStringId, listener)

@@ -67,15 +67,15 @@ public class CallHandlerService extends IntentService {
     private void endCall(@NonNull final String number) {
         Logger.e(TAG,"handle endCall " + number);
         try {
-            CallController.endCall(3000L, new CallController.CallEndCallback() {
+            CallController.endCall(new CallController.CallEndCallback() {
                 @Override
-                public void onEndCall(boolean isSuccessfull) {
-                    Resources res = MainApp.getAppContext().getResources();
+                public void onEndCall(boolean isSuccessfull, Exception e) {
+                    if (isSuccessfull){
+                        notifyEndCall(number);
+                    } else {
+                        notifyErrorEndCall(number, e.toString());
+                    }
 
-                    UserNotifyManager.showNotification(CallHandlerService.this,
-                            res.getString(R.string.app_name),
-                            String.format(Locale.ENGLISH, res.getString(R.string.call_was_blocked), number),
-                            MainActivity.class);
                 }
             });
 
@@ -84,5 +84,17 @@ public class CallHandlerService extends IntentService {
         }
 
 
+    }
+
+    private void notifyErrorEndCall(String number, String error) {
+        UserNotifyManager.showToast(CallHandlerService.this, String.format(Locale.ENGLISH, MainApp.getAppContext().getResources().getString(R.string.blocking_call_error), number, error), true);
+    }
+
+    private void notifyEndCall(String number) {
+        Resources res = MainApp.getAppContext().getResources();
+        UserNotifyManager.showNotification(CallHandlerService.this,
+                res.getString(R.string.app_name),
+                String.format(Locale.ENGLISH, res.getString(R.string.call_was_blocked), number),
+                MainActivity.class);
     }
 }

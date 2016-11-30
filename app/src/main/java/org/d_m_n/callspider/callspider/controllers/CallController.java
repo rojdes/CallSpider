@@ -21,13 +21,13 @@ import java.lang.reflect.Method;
 public final class CallController {
 
     private static final String TAG =  CallController.class.getSimpleName();
-    private static final long MIN_SEC_DELAY = 4000L ;
+    private static final long DELAY_DISCONNECT_CALL = 200L ;
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     public static interface CallEndCallback{
 
-        public void  onEndCall(boolean isSuccessfull);
+        public void  onEndCall(boolean isSuccessfull, Exception e);
     }
 
     private static final void endCall(Context context) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -40,23 +40,34 @@ public final class CallController {
     }
 
 
-    public static final void endCall(long delay, final CallEndCallback callback){
-        sHandler.postDelayed(new Runnable() {
+    public static final void endCall(final CallEndCallback callback){
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    CallController.disconnectCall("");
-                    if (callback != null){
-                        callback.onEndCall(true);
+                    boolean is;
+                    while ((is = CallController.disconnectCall("")) == false){
+                        Logger.e(TAG, "endCall = " + is);
+                        Thread.sleep(DELAY_DISCONNECT_CALL);
                     }
+                    notifyCallback(callback,true, null);
                 } catch (Exception e) {
                     Logger.e(TAG, "endCall error = " + e.toString());
-                    if (callback != null){
-                        callback.onEndCall(false);
-                    }
+                    notifyCallback(callback,false, e);
+
+            }
+        }}).start();
+    }
+
+    private static void notifyCallback(final CallEndCallback callback, final boolean successfull, final Exception e) {
+        sHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (callback != null){
+                    callback.onEndCall(successfull, e);
                 }
             }
-        }, delay < MIN_SEC_DELAY ? MIN_SEC_DELAY : delay);
+        });
     }
 
     public static boolean endCallWrapException(Context context){
@@ -146,8 +157,7 @@ public final class CallController {
      * work with end call
      * @param type
      */
-    public static void disconnectCall(String type){
-        try {
+    public static boolean disconnectCall(String type) throws Exception{
             String serviceManagerName = "android.os.ServiceManager";
             String serviceManagerNativeName = "android.os.ServiceManagerNative";
             String telephonyName = "com.android.internal.telephony.ITelephony";
@@ -172,18 +182,9 @@ public final class CallController {
             Method serviceMethod = telephonyStubClass.getMethod("asInterface", IBinder.class);
             telephonyObject = serviceMethod.invoke(null, retbinder);
             telephonyEndCall = telephonyClass.getMethod("endCall");
-            telephonyEndCall.invoke(telephonyObject);
+            Object value = telephonyEndCall.invoke(telephonyObject);
+            Logger.e(TAG, "end call  = " + (Boolean)value);
+            return  (Boolean)value;
 
-//            // Reject call and send SMS
-//            if (type.equalsIgnoreCase("reject")) {
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage(_incomingNumber, null, "Hey! I am driving right now. Please call me back after some time", null, null);
-//                Toast.makeText(context, "CALL REJECTED", Toast.LENGTH_SHORT).show();
-//            }
-
-        } catch (Exception e) {
-            Logger.e(TAG, "disconnect call e= " + e.toString());
-            e.printStackTrace();
-        }
     }
 }
