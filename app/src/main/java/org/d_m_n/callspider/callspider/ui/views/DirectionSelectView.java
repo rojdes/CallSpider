@@ -87,13 +87,13 @@ public class DirectionSelectView extends LinearLayout implements View.OnClickLis
     }
 
     private void handleDirectionClick(ContactCallForbidDirection d) {
-        hide(d);
+        hideItem(d);
         if (clickListener != null) {
             clickListener.onDirectionClick(d);
         }
     }
 
-    public void hide(ContactCallForbidDirection d){
+    public void hideItem(ContactCallForbidDirection d){
         mivUp.setVisibility(VISIBLE);
         mivDown.setVisibility(VISIBLE);
         mivBoth.setVisibility(VISIBLE);
@@ -110,7 +110,23 @@ public class DirectionSelectView extends LinearLayout implements View.OnClickLis
         }
     }
 
-    public void setClickListener(DirectionClickListener onClickListener) {
+    public void toggleVisibility() {
+        setVisibility(isVisible() ? GONE : VISIBLE);
+    }
+
+    public void hide(){
+        setVisibility(GONE);
+    }
+
+    public void show(){
+        setVisibility(VISIBLE);
+    }
+
+    public boolean isVisible(){
+        return getVisibility() == VISIBLE;
+    }
+
+    public void setItemClickListener(DirectionClickListener onClickListener) {
         this.clickListener = onClickListener;
     }
 }
