@@ -1,5 +1,11 @@
 package org.d_m_n.callspider.callspider.model.enums;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+
+import org.d_m_n.callspider.callspider.R;
+
 /**
  * Created by d1m11n on 11/11/16.
  */
@@ -32,6 +38,23 @@ public enum ContactCategory {
 
     public int getPriority(){
         return priority;
+    }
+
+    public Drawable getCategoryIcon(Context context){
+        switch(this){
+            case NATIVE:
+                return ContextCompat.getDrawable(context, R.mipmap.ic_native);
+            case SEX:
+               return ContextCompat.getDrawable(context, R.mipmap.ic_sex);
+            case PRIVATE:
+                return ContextCompat.getDrawable(context, R.mipmap.ic_private);
+            case WORK:
+                return ContextCompat.getDrawable(context, R.mipmap.ic_work);
+            case PUBLIC:
+                return ContextCompat.getDrawable(context, R.mipmap.ic_public);
+            default:
+                return ContextCompat.getDrawable(context, R.mipmap.ic_default);
+        }
     }
 
 

@@ -20,6 +20,7 @@ public final class Constants {
 
         String CALL_RINGING = APP_ID + ".call_ringing";
 
+        String UPDATE_CONTACTS_LIST = APP_ID + ".update_contacts";
     }
 
     public interface Extras {
