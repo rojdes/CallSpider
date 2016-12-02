@@ -2,10 +2,12 @@ package org.d_m_n.callspider.callspider.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.Constants;
@@ -15,48 +17,72 @@ import org.d_m_n.callspider.callspider.tools.FragmentTools;
 import org.d_m_n.callspider.callspider.ui.adapters.MainViewPagerAdapter;
 import org.d_m_n.callspider.callspider.ui.fragments.BaseFragment;
 import org.d_m_n.callspider.callspider.ui.fragments.ContactListFragment;
+import org.d_m_n.callspider.callspider.ui.views.ImplToolbar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnPageChange;
+
+import static butterknife.OnPageChange.Callback.PAGE_SCROLLED;
+import static butterknife.OnPageChange.Callback.PAGE_SCROLL_STATE_CHANGED;
+import static butterknife.OnPageChange.Callback.PAGE_SELECTED;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int ACTIVITY_PERMISSION_REQUEST = 1001;
-    private ViewPager mViewPager;
+
+
     MainViewPagerAdapter mPagerAdapter;
+
+    @BindView(R.id.toolbar)
+    protected ImplToolbar mToolbar;
+
+    @BindView(R.id.tabLayout)
+    protected TabLayout mTabLayout;
+
+    @BindView(R.id.pager)
+    protected ViewPager mViewPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager =(ViewPager)findViewById(R.id.pager);
+        ButterKnife.bind(this);
+        setActionBar(mToolbar);
         if (!PermissionManager.isPhonePermissionGranted(this) || !PermissionManager.isContactsPermissionsGranted(this)){
             PermissionManager.askPhoneStatePermission(this, ACTIVITY_PERMISSION_REQUEST);
         }
-        setViewPager();
+        setupViewPager();
+        mTabLayout.setupWithViewPager(mViewPager);
+        setupTabLayout();
     }
 
-    private void setViewPager() {
+    private void setupViewPager() {
         mPagerAdapter = new MainViewPagerAdapter(getFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Logger.e(TAG, "onPageScrolled = " + position);
-            }
+    }
 
-            @Override
-            public void onPageSelected(int position) {
-                Logger.e(TAG, "onPageSelected = " + position);
-            }
+    @OnPageChange(value = R.id.pager, callback = PAGE_SCROLL_STATE_CHANGED)
+    protected void onPageScrollStateChanged(int state){
+        Logger.e(TAG, "onPageScrollStateChanged = " + state);
+    }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                Logger.e(TAG, "onPageScrollStateChanged = " + state);
+    @OnPageChange(value = R.id.pager, callback = PAGE_SELECTED)
+    protected void onPageSelected(int position){
+        Logger.e(TAG, "onPageSelected = " + position);
+    }
 
-            }
-        });
+    @OnPageChange(value = R.id.pager, callback = PAGE_SCROLLED)
+    protected void onPageScrolled(int position, float positionOffset, int positionOffsetPixels){
+        Logger.e(TAG, "onPageScrolled = " + position);
+    }
 
+    private void setupTabLayout(){
+        mTabLayout.getTabAt(0).setText(R.string.Contacts);
+        mTabLayout.getTabAt(1).setText(R.string.Categories);
     }
 
 

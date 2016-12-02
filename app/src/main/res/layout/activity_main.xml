@@ -7,21 +7,34 @@
     android:layout_height="match_parent"
     tools:context="org.d_m_n.callspider.callspider.ui.MainActivity">
 
-    <org.d_m_n.callspider.callspider.ui.views.ImplToolbar
-        android:id="@+id/toolbar"
-        android:layout_alignParentTop="true"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content">
 
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:background="@android:color/holo_green_light">
+        <org.d_m_n.callspider.callspider.ui.views.ImplToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/holo_green_light"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    </org.d_m_n.callspider.callspider.ui.views.ImplToolbar>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@android:color/holo_green_dark"
+            app:tabIndicatorColor="@android:color/holo_orange_light"
+
+            app:tabSelectedTextColor="@android:color/holo_orange_dark"
+            app:tabTextColor="@android:color/black" />
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
-        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar" />
 </RelativeLayout>
