@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:orientation="horizontal"
+    android:layoutDirection="rtl">
+
+    <org.d_m_n.callspider.callspider.ui.views.AlertView
+        android:id="@+id/cstm_alert_view"
+        android:layout_width="@dimen/item_toolbar_size"
+        android:layout_height="@dimen/item_toolbar_size"
+        android:layout_gravity="left|center_vertical"
+         />
+</LinearLayout>

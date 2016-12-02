@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == ACTIVITY_PERMISSION_REQUEST){
-            PermissionManager.handlePermissionRequest(MainActivity.this, permissions, grantResults);
+        if (requestCode == ACTIVITY_PERMISSION_REQUEST && PermissionManager.handlePermissionRequest(MainActivity.this, permissions, grantResults)){
+
             //LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constants.Actions.UPDATE_CONTACTS_LIST));
             BaseFragment fr = (ContactListFragment) FragmentTools.getFragment(MainActivity.this, mViewPager,mPagerAdapter,0);
             if(fr != null){

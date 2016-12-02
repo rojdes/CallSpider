@@ -1,14 +1,17 @@
 package org.d_m_n.callspider.callspider.ui.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.Logger;
+import org.d_m_n.callspider.callspider.tools.UiSizesTools;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by d1m11n on 11/30/16.
  */
 
-public class AlertView extends RelativeLayout implements View.OnClickListener {
+public class AlertView extends FrameLayout implements View.OnClickListener {
 
     private static final String TAG = AlertView.class.getSimpleName();
 
@@ -43,10 +46,17 @@ public class AlertView extends RelativeLayout implements View.OnClickListener {
         init(context);
     }
 
+    public AlertView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init(context);
+    }
+
+
     private void init(Context context) {
-        View v = inflate(context, R.layout.incl_alert, this);
+        View v = inflate(context, R.layout.incl_alert_toolbar_icon, this);
         ButterKnife.bind(this,v);
         this.setOnClickListener(this);
+
     }
 
     @Override

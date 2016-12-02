@@ -12,6 +12,10 @@
     <dimen name="tv_item_contact_list_name_textsize">18dp</dimen>
     <dimen name="tv_item_contact_list_number_textsize">12dp</dimen>
     <dimen name="iv_incl_alert_size">40dp</dimen>
-    <dimen name="tv_alert_size">14dp</dimen>
+    <dimen name="tv_alert_size">16dp</dimen>
     <dimen name="tv_incl_alert_size">20dp</dimen>
+    <dimen name="icon_image_toolbar_size">24dp</dimen>
+    <dimen name="item_toolbar_size">48dp</dimen>
+    <dimen name="tv_alert_margin_left">12dp</dimen>
+    <dimen name="tv_alert_margin_top">12dp</dimen>
 </resources>

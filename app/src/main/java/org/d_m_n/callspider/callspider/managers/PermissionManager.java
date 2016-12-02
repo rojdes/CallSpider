@@ -45,11 +45,12 @@ public class PermissionManager {
         return true;
     }
 
-    public static void handlePermissionRequest(Activity rootActivity, String[] permissions, int[] grantResults) {
+    public static boolean handlePermissionRequest(Activity rootActivity, String[] permissions, int[] grantResults) {
 //        PermissionManager.isPhonePermissionsRequestGranted(grantResults)){
 //            UserNotifyManager.showToast(this, R.string.verify_permissions_error,true);
 //        }
 //            return;
+        return true;
     }
 
     public static boolean isContactsPermissionsGranted(@NonNull Context context) {
