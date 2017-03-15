@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
+import org.d_m_n.callspider.callspider.ui.MainActivity;
+
 
 /**
  * Created by d1m11n on 11/27/16.
@@ -37,6 +39,10 @@ public class PermissionManager {
         ActivityCompat.requestPermissions(activity,phonePermissions, requestCode);
     }
 
+    public static void askContactsPermissionGranted(@NonNull Activity activity, int requestCode) {
+        ActivityCompat.requestPermissions(activity,contactsPermissions, requestCode);
+    }
+
     public static boolean isPhonePermissionsRequestGranted(int[] grantResults) {
         for (int i =0; i < phonePermissions.length; i++){
             if ( grantResults [i] != PackageManager.PERMISSION_GRANTED)
@@ -61,4 +67,5 @@ public class PermissionManager {
         }
         return true;
     }
+
 }

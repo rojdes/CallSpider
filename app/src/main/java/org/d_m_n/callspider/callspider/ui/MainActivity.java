@@ -52,8 +52,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setActionBar(mToolbar);
-        if (!PermissionManager.isPhonePermissionGranted(this) || !PermissionManager.isContactsPermissionsGranted(this)){
+        if (!PermissionManager.isPhonePermissionGranted(this)){
             PermissionManager.askPhoneStatePermission(this, ACTIVITY_PERMISSION_REQUEST);
+        }
+        if (!PermissionManager.isContactsPermissionsGranted(this)){
+            PermissionManager.askContactsPermissionGranted(this, ACTIVITY_PERMISSION_REQUEST);
         }
         setupViewPager();
         mTabLayout.setupWithViewPager(mViewPager);
