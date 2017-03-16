@@ -1,6 +1,7 @@
 package org.d_m_n.callspider.callspider.observers;
 
 import android.database.ContentObserver;
+import android.net.Uri;
 
 import org.d_m_n.callspider.callspider.app.Logger;
 
@@ -18,8 +19,11 @@ public class ContactsContentObserver extends ContentObserver {
 
     @Override
     public void onChange(boolean selfChange) {
-        super.onChange(selfChange);
-        Logger.d(TAG, "STUB!!! onChange smth ");
+        this.onChange(selfChange, null);
+    }
 
+    @Override
+    public void onChange(boolean selfChange, Uri uri) {
+        Logger.d(TAG, "STUB!!! onChange smth with self = " + selfChange + " and Uri ="  + uri);
     }
 }
