@@ -10,10 +10,10 @@ import org.d_m_n.callspider.callspider.app.MainApp;
  * Created by d1m11n on 12/2/16.
  */
 
-public final class UiSizesTools {
+public final class UiTools {
 
-    private static int densityDpi = DisplayMetrics.DENSITY_MEDIUM;
-    private static float density = 1;
+    private static int densityDpi;
+    private static float density;
 
     private static final int ICON_TOOLBAR_SIZEdp =24;
 

@@ -1,17 +1,14 @@
 package org.d_m_n.callspider.callspider.ui.views;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.Logger;
-import org.d_m_n.callspider.callspider.tools.UiSizesTools;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
