@@ -1,7 +1,7 @@
 package org.d_m_n.callspider.callspider.model;
 
 import org.d_m_n.callspider.callspider.db.model.ContactDb;
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
+import org.d_m_n.callspider.callspider.model.enums.ForbiddenDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public final class Mapping {
         CommonContact cm = new CommonContact(ContactCategory.valueOf(model.getCategory()));
         cm.contactId = model.getContactId();
         cm.number = model.getNumber();
-        cm.direction = ContactCallForbidDirection.valueOf(model.getDirection());
+        cm.direction = ForbiddenDirection.valueOf(model.getDirection());
         cm.name = model.getName();
         return cm;
     }

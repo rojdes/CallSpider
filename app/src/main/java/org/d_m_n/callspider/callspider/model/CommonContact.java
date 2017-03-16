@@ -1,6 +1,6 @@
 package org.d_m_n.callspider.callspider.model;
 
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
+import org.d_m_n.callspider.callspider.model.enums.ForbiddenDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 
 /**
@@ -11,7 +11,7 @@ public class CommonContact {
 
 
 
-    public ContactCallForbidDirection direction;
+    public ForbiddenDirection direction;
 
     public long contactId;
 

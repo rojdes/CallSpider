@@ -10,7 +10,7 @@ import org.d_m_n.callspider.callspider.R;
  * Created by d1m11n on 11/11/16.
  */
 
-public enum ContactCallForbidDirection {
+public enum ForbiddenDirection {
 
     INCOMING,
     OUTGOING,

@@ -6,16 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.d_m_n.callspider.callspider.R;
-import org.d_m_n.callspider.callspider.app.MainApp;
-import org.d_m_n.callspider.callspider.managers.ContactsManager;
-import org.d_m_n.callspider.callspider.model.CommonContact;
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 import org.d_m_n.callspider.callspider.ui.adapters.holders.CategoryViewHolder;
-import org.d_m_n.callspider.callspider.ui.adapters.holders.ContactViewHolder;
-import org.d_m_n.callspider.callspider.ui.views.ItemContactView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

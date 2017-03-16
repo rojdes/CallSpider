@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.model.CommonContact;
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
+import org.d_m_n.callspider.callspider.model.enums.ForbiddenDirection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
 
     public interface ItemContactClickListener{
 
-        public void onDirectionChanged(ContactCallForbidDirection d);
+        public void onDirectionChanged(ForbiddenDirection d);
     }
 
     @BindView(R.id.tv_item_contact_list_name)
@@ -105,16 +105,16 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.iv_direction_select_arrow_up:
-                handleDirectionClick(ContactCallForbidDirection.OUTGOING);
+                handleDirectionClick(ForbiddenDirection.OUTGOING);
                 break;
             case R.id.iv_direction_select_arrow_down:
-                handleDirectionClick(ContactCallForbidDirection.INCOMING);
+                handleDirectionClick(ForbiddenDirection.INCOMING);
                 break;
             case R.id.iv_direction_select_arrow_both:
-                handleDirectionClick(ContactCallForbidDirection.FULL);
+                handleDirectionClick(ForbiddenDirection.FULL);
                 break;
             case R.id.iv_direction_select_arrow_unknown:
-                handleDirectionClick(ContactCallForbidDirection.NOT_SET);
+                handleDirectionClick(ForbiddenDirection.NOT_SET);
                 break;
             default:
                 break;
@@ -122,7 +122,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         }
     }
 
-    private void handleDirectionClick(ContactCallForbidDirection d) {
+    private void handleDirectionClick(ForbiddenDirection d) {
         hideItem(d);
         setContactDirection(d);
         hideSelectDirection();
@@ -132,7 +132,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
 
     }
 
-    public void hideItem(ContactCallForbidDirection d){
+    public void hideItem(ForbiddenDirection d){
         mivUp.setVisibility(VISIBLE);
         mivDown.setVisibility(VISIBLE);
         mivBoth.setVisibility(VISIBLE);
@@ -157,7 +157,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
         hideItem(contact.direction);
     }
 
-    public void setContactDirection(ContactCallForbidDirection d){
+    public void setContactDirection(ForbiddenDirection d){
         mContact.direction = d;
         ivContactDirection.setImageDrawable(d.getDrawable(ivContactDirection.getContext()));
     }

@@ -8,7 +8,7 @@ import org.d_m_n.callspider.callspider.db.DatabaseHelper;
 import org.d_m_n.callspider.callspider.db.model.ContactDb;
 import org.d_m_n.callspider.callspider.model.CommonContact;
 import org.d_m_n.callspider.callspider.model.Mapping;
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
+import org.d_m_n.callspider.callspider.model.enums.ForbiddenDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 import org.d_m_n.callspider.callspider.tools.ContactTools;
 
@@ -129,7 +129,7 @@ public class ContactsManager {
             c.setContactId(Long.parseLong(n.id));
             c.setName(n.name);
             c.setNumber(n.number);
-            c.setDirection(ContactCallForbidDirection.NOT_SET.toString());
+            c.setDirection(ForbiddenDirection.NOT_SET.toString());
             cc.add(c);
         }
         Logger.e(TAG, "cc" + cc.size());

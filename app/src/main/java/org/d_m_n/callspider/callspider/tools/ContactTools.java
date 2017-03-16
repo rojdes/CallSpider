@@ -3,16 +3,11 @@ package org.d_m_n.callspider.callspider.tools;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.managers.PermissionManager;
 import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
-import org.d_m_n.callspider.callspider.model.enums.ContactCallForbidDirection;
 
 import java.util.ArrayList;
 
