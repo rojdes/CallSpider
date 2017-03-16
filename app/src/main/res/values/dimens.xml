@@ -18,4 +18,7 @@
     <dimen name="item_toolbar_size">48dp</dimen>
     <dimen name="tv_alert_margin_left">12dp</dimen>
     <dimen name="tv_alert_margin_top">12dp</dimen>
+
+    <!-- font sizes -->
+    <dimen name="fs_normal">14dp</dimen>
 </resources>

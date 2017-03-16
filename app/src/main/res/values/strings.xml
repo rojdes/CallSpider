@@ -5,5 +5,7 @@
     <string name="blocking_call_error">Call %1$s was not blocked. Error is %2$s</string>
     <string name="Contacts">Contacts</string>
     <string name="Categories">Categories</string>
+    <string name="enter_password">Enter password</string>
+    <string name="password_not_set">Password was not set</string>
 
 </resources>
