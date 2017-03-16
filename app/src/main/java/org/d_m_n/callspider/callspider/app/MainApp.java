@@ -24,7 +24,6 @@ public class MainApp extends Application {
     public void onCreate() {
         super.onCreate();
         ButterKnife.setDebug(true);
-        PreferencesManager.resetContactsCopied(this);
         sContext = this;
     }
 

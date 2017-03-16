@@ -41,7 +41,7 @@ public class ContactsManager {
     }
 
     public ArrayList<CommonContact> getContacts() {
-        if (!PreferencesManager.isContactsCopied(mContext)) {
+        if (!PreferencesManager.isContactsCopied()) {
             fillContactsWrapEception(false);
         }
         try {
@@ -99,7 +99,7 @@ public class ContactsManager {
 
     //FIXME logic of first launch. Possibly use splash screen
     private void fillContacts(boolean keepOld) throws SQLException {
-        if (PreferencesManager.isFirstLaunched(mContext)){
+        if (PreferencesManager.isFirstLaunched()){
             dbHelper.getContactDao().create(convertFrom(ContactTools.getNativeContacts(mContext)));
         } else if (!keepOld) {
             //TODO Verify if needed clear here
@@ -110,7 +110,7 @@ public class ContactsManager {
         } else {
             updateAppContactsFromNative();
         }
-        PreferencesManager.setContactsCopied(mContext);
+        PreferencesManager.setContactsCopied(true);
     }
 
     private void updateAppContactsFromNative() {
