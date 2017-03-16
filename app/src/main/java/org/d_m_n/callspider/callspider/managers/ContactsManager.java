@@ -97,21 +97,20 @@ public class ContactsManager {
         }
     }
 
+    //FIXME logic of first launch. Possibly use splash screen
     private void fillContacts(boolean keepOld) throws SQLException {
         if (PreferencesManager.isFirstLaunched(mContext)){
             dbHelper.getContactDao().create(convertFrom(ContactTools.getNativeContacts(mContext)));
-            PreferencesManager.setContactsCopied(mContext);
-            return;
-        }
-        if (!keepOld) {
+        } else if (!keepOld) {
             //TODO Verify if needed clear here
             //dbHelper.clearContactsTable();
             for (ContactDb c : convertFrom(ContactTools.getNativeContacts(mContext)))
                 dbHelper.getContactDao().createOrUpdate(c);
-            PreferencesManager.setContactsCopied(mContext);
+
         } else {
             updateAppContactsFromNative();
         }
+        PreferencesManager.setContactsCopied(mContext);
     }
 
     private void updateAppContactsFromNative() {

@@ -65,8 +65,8 @@ public class ContactListFragment extends BaseFragment{
     }
 
     @Override
-    public void updateData() {
-        super.updateData();
+    public void resetData() {
+        super.resetData();
         ContactsManager.with(getActivity()).updateContacts();
         setContactList();
     }

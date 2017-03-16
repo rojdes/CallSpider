@@ -52,7 +52,7 @@ public final class PreferencesManager {
 
     public static boolean isContactsCopied(@NonNull Context context){
         initPrefInstanceIfNeeded(context);
-        return prefs.getBoolean(FIRST_LAUNCHED, false);
+        return prefs.getBoolean(CONTACT_COPIED, false);
     }
 
     public static void setContactsWereSelected(@NonNull Context context){
