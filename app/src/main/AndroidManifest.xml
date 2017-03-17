@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,7 @@
             <!--</intent-filter>-->
         </receiver>
         <service android:name=".services.CallHandlerService"/>
-        <service android:name=".services.SystemEventsService"/>
+        <service android:name=".services.SystemEventsService" android:enabled="true" android:exported="true"/>
     </application>
 
 </manifest>

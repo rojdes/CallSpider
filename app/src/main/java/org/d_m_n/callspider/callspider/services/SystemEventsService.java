@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+
+import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.Logger;
+import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
 import org.d_m_n.callspider.callspider.observers.ContactsContentObserver;
+import org.d_m_n.callspider.callspider.ui.MainActivity;
 
 /**
  * Class for handling systemEvernts like updating native contact
@@ -29,7 +33,7 @@ public final class SystemEventsService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        startForeground(0, null);
+        UserNotifyManager.showPersistantNotification(this, getString(R.string.app_name), getString(R.string.spider_is_active), MainActivity.class);
         Logger.e(TAG, "onCreate");
         registerReceivers(this);
     }

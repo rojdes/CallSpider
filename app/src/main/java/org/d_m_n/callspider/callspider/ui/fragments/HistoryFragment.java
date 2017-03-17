@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class HistoryFragment extends BaseFragment {
 
-    @BindView(R.id.rv_categories_list)
+    @BindView(R.id.rv_history_list)
     protected RecyclerView mrvCategoriesList;
 
 

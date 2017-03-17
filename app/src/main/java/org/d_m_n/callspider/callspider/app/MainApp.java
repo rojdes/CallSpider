@@ -2,8 +2,11 @@ package org.d_m_n.callspider.callspider.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
+import org.d_m_n.callspider.callspider.BuildConfig;
 import org.d_m_n.callspider.callspider.managers.PreferencesManager;
+import org.d_m_n.callspider.callspider.services.SystemEventsService;
 
 import butterknife.ButterKnife;
 
@@ -23,7 +26,8 @@ public class MainApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ButterKnife.setDebug(true);
+        ButterKnife.setDebug(BuildConfig.DEBUG);
+        startService(new Intent(this, SystemEventsService.class));
         sContext = this;
     }
 

@@ -7,5 +7,7 @@
     <string name="Categories">Categories</string>
     <string name="enter_password">Enter password</string>
     <string name="password_not_set">Password was not set</string>
+    <string name="History">History</string>
+    <string name="spider_is_active">App is active</string>
 
 </resources>

@@ -46,19 +46,35 @@ public class UserNotifyManager {
 
     }
 
-    public static void showNotification(Context context, String title, String content, Class<? extends Activity> activityClass){
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    public static void showNotification(Context context, String title, CharSequence content, Class<? extends Activity> activityClass){
+        NotificationCompat.Builder builder = buildBaseNotification(context,title,content,activityClass);
+        builder.setAutoCancel(true);
+        notifyByNotification(context, builder, notificationId);
+    }
+
+    public static void showPersistantNotification(Context context, String title, CharSequence content, Class<? extends Activity> activityClass){
+        NotificationCompat.Builder builder = buildBaseNotification(context,title,content,activityClass);
+        builder.setAutoCancel(false);
+        builder.setOngoing(true);
+        notifyByNotification(context, builder,notificationId + 1);
+    }
+
+    private static NotificationCompat.Builder buildBaseNotification(Context context, String title, CharSequence content, Class<? extends Activity> activityClass){
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(content);
-        mBuilder.setAutoCancel(true);
         if (activityClass != null) {
             mBuilder.setContentIntent(getPendingIntentForNotification(context, activityClass));
         }
-        mNotificationManager.notify(notificationId, mBuilder.build());
+        return mBuilder;
+    }
+
+    private static void notifyByNotification(Context context, NotificationCompat.Builder builder, int notificationId){
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(notificationId, builder.build());
     }
 
     private static PendingIntent getPendingIntentForNotification(Context context, Class<? extends Activity> activityClass) {

@@ -84,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout(){
-        mTabLayout.getTabAt(0).setText(R.string.Contacts);
-        mTabLayout.getTabAt(1).setText(R.string.Categories);
+        for(int i = 0; i < mPagerAdapter.getCount(); i++) {
+            mTabLayout.getTabAt(i).setText(MainViewPagerAdapter.getTabTitleResIdFor(i));
+        }
     }
-
 
     @Override
     protected void onResume() {
@@ -105,8 +105,5 @@ public class MainActivity extends AppCompatActivity {
             }
             return;
         }
-
-
-
     }
 }
