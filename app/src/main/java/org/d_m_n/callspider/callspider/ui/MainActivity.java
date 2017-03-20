@@ -2,6 +2,7 @@ package org.d_m_n.callspider.callspider.ui;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pager)
     protected ViewPager mViewPager;
 
+    @BindView(R.id.fab)
+    protected FloatingActionButton mFab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         if (!PermissionManager.isContactsPermissionsGranted(this)){
             PermissionManager.askContactsPermissionGranted(this, ACTIVITY_PERMISSION_REQUEST);
         }
+        initViews();
+    }
+
+    private void initViews(){
         setupViewPager();
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabLayout();
@@ -99,10 +107,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ACTIVITY_PERMISSION_REQUEST && PermissionManager.handlePermissionRequest(MainActivity.this, permissions, grantResults)){
 
             //LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(Constants.Actions.UPDATE_CONTACTS_LIST));
-            BaseFragment fr = (ContactListFragment) FragmentTools.getFragment(MainActivity.this, mViewPager,mPagerAdapter,0);
-            if(fr != null){
-                fr.updateData();
-            }
+            initViews();
             return;
         }
     }

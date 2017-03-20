@@ -26,6 +26,8 @@ public class CallHandlerService extends IntentService {
 
     private static final String TAG = CallHandlerService.class.getSimpleName();
 
+    private LastCallHolder mCallHolder;
+
     public CallHandlerService(String name) {
         super(name);
     }
@@ -33,6 +35,8 @@ public class CallHandlerService extends IntentService {
     public CallHandlerService(){
         super(TAG);
     }
+
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -55,8 +59,14 @@ public class CallHandlerService extends IntentService {
             case FULL:
                 return true;
             case INCOMING:
+                mCallHolder = new LastCallHolder(true, number);
                 return intent.getAction().equals(Constants.Actions.CALL_RINGING);
-            case OUTGOING:
+            case OUTGOING: //TODO CHECK with incoming call and then answering
+                if (mCallHolder != null && mCallHolder.startWithRinging && mCallHolder.number.equalsIgnoreCase(number)){
+                    mCallHolder = null;
+                    return  false;
+                }
+                mCallHolder = null;
                 return intent.getAction().equals(Constants.Actions.CALL_OFFHOOK);
             case NOT_SET:
             default:
@@ -96,5 +106,19 @@ public class CallHandlerService extends IntentService {
                 res.getString(R.string.app_name),
                 String.format(Locale.ENGLISH, res.getString(R.string.call_was_blocked), number),
                 MainActivity.class);
+    }
+
+    private class LastCallHolder{
+
+        private boolean startWithRinging;
+
+        private String number;
+
+        private LastCallHolder(boolean startWithRinging, String number){
+            this.startWithRinging = startWithRinging;
+            this.number = number;
+        }
+
+
     }
 }

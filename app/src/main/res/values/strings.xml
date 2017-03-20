@@ -9,5 +9,6 @@
     <string name="password_not_set">Password was not set</string>
     <string name="History">History</string>
     <string name="spider_is_active">App is active</string>
+    <string name="Enter_name_or_number">Enter name or number</string>
 
 </resources>

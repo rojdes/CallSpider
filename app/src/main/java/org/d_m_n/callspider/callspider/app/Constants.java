@@ -28,4 +28,23 @@ public final class Constants {
         String NUMBER = APP_ID + ".call_number";
 
     }
+
+    public static class DebugMode{
+
+        public static boolean FAKE_CONTACTS =true;
+
+        public static boolean isAnyModeActive(){
+            if (FAKE_CONTACTS)
+                return true;
+            return false;
+        }
+
+        public static String enumerateModes() {
+            StringBuilder b = new StringBuilder();
+            if (FAKE_CONTACTS){
+                b.append("FAKE_CONTACTS");
+            }
+            return b.toString();
+        }
+    }
 }

@@ -11,10 +11,12 @@ import org.d_m_n.callspider.callspider.model.Mapping;
 import org.d_m_n.callspider.callspider.model.enums.ForbiddenDirection;
 import org.d_m_n.callspider.callspider.model.enums.ContactCategory;
 import org.d_m_n.callspider.callspider.tools.ContactTools;
+import org.d_m_n.callspider.callspider.tools.RandomGenerator;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by d1m11n on 11/14/16.
@@ -134,5 +136,19 @@ public class ContactsManager {
         }
         Logger.e(TAG, "cc" + cc.size());
         return cc;
+    }
+
+    public ArrayList<CommonContact> getFakeContacts() {
+        ArrayList<CommonContact> list = new ArrayList<CommonContact>();
+        Random random = new Random();
+        for(int i=0; i<200; i++){
+            CommonContact c = new CommonContact(ContactCategory.values()[random.nextInt(ContactCategory.values().length)]);
+            c.direction = ForbiddenDirection.values()[random.nextInt(ForbiddenDirection.values().length)];
+            c.contactId = random.nextLong();
+            c.name = RandomGenerator.randomString(10);
+            c.number = String.valueOf(random.nextLong());
+            list.add(c);
+        }
+        return list;
     }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin">
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_contact_list"
+        android:layout_below="@id/et_contact_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,10 +17,20 @@
 
     <ProgressBar
         android:id="@+id/pb_contact_list"
-        android:indeterminate="true"
-        android:indeterminateBehavior="repeat"
-        android:layout_gravity="center"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:visibility="gone"/>
-</FrameLayout>
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/et_contact_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/fs_normal"
+        android:hint="@string/Enter_name_or_number"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

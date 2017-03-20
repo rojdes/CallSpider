@@ -17,10 +17,10 @@ import java.util.ArrayList;
  */
 public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
 
-    private ArrayList<CommonContact> contacts;
+    private ArrayList<CommonContact> allContacts;
 
     public ContactListAdapter(ArrayList<CommonContact> contacts){
-        this.contacts =contacts;
+        this.allContacts =contacts;
     }
 
 
@@ -32,12 +32,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
 
     @Override
     public int getItemCount() {
-        return contacts == null? 0 : contacts.size();
+        return allContacts == null? 0 : allContacts.size();
     }
 
     @Override
     public void onBindViewHolder(final ContactViewHolder holder, int position) {
-        final CommonContact contact = contacts.get(position);
+        final CommonContact contact = allContacts.get(position);
         holder.cstmItemContactView.setContact(contact);
         holder.cstmItemContactView.setItemClickListener(new ItemContactView.ItemContactClickListener() {
 
@@ -47,5 +47,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactViewHolder>{
                 ContactsManager.with(MainApp.getAppContext()).updateContact(contact);
             }
         });
+    }
+
+    public void filterWith(CharSequence text) {
+        if (allContacts == null || allContacts.size() == 0){
+            return;
+        }
+
     }
 }

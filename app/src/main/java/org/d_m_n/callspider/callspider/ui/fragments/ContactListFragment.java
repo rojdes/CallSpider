@@ -7,15 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import org.d_m_n.callspider.callspider.R;
+import org.d_m_n.callspider.callspider.app.Constants;
 import org.d_m_n.callspider.callspider.managers.ContactsManager;
 import org.d_m_n.callspider.callspider.managers.PermissionManager;
 import org.d_m_n.callspider.callspider.ui.adapters.ContactListAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
 
 /**
  * Created by d1m11n on 11/11/16.
@@ -29,6 +32,9 @@ public class ContactListFragment extends BaseFragment{
 
     @BindView(R.id.pb_contact_list)
     protected ProgressBar mpbProgress;
+
+    @BindView(R.id.et_contact_list)
+    protected EditText metSearch;
 
 
     private LinearLayoutManager mLayoutManager;
@@ -58,10 +64,18 @@ public class ContactListFragment extends BaseFragment{
         mrvContactList.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mrvContactList.setLayoutManager(mLayoutManager);
-        if (PermissionManager.isPhonePermissionGranted(getActivity())) {
+        if (Constants.DebugMode.FAKE_CONTACTS){
+            mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getFakeContacts());
+            mrvContactList.setAdapter(mContactListAdapter);
+        } else if (PermissionManager.isPhonePermissionGranted(getActivity())) {
             mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getContacts());
             mrvContactList.setAdapter(mContactListAdapter);
         }
+    }
+
+    @OnTextChanged(R.id.et_contact_list)
+    public void onSearch(CharSequence text){
+        mContactListAdapter.filterWith(text);
     }
 
     @Override
