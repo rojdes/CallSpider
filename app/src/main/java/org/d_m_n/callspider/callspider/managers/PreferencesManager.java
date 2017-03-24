@@ -76,6 +76,7 @@ public final class PreferencesManager {
         editor.putBoolean(PASSWORD_SET,state).apply();
     }
 
+    //TODO CHECK IF NEED TO CLEAN
     public static void setLastNumber(String number) {
         initPrefInstanceIfNeeded(MainApp.getAppContext());
         editor.putString(LAST_INCOMING_NUMBER ,number).apply();

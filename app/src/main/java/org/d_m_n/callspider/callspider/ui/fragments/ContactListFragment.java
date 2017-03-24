@@ -2,6 +2,7 @@ package org.d_m_n.callspider.callspider.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +36,10 @@ public class ContactListFragment extends BaseFragment{
 
     @BindView(R.id.et_contact_list)
     protected EditText metSearch;
+
+
+    @BindView(R.id.fab)
+    protected FloatingActionButton mFab;
 
 
     private LinearLayoutManager mLayoutManager;

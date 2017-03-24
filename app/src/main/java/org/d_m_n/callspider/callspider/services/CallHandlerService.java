@@ -116,18 +116,4 @@ public class CallHandlerService extends IntentService {
                 String.format(Locale.ENGLISH, res.getString(R.string.call_was_blocked), number),
                 MainActivity.class);
     }
-
-    private class LastCallHolder{
-
-        private boolean startWithRinging;
-
-        private String number;
-
-        private LastCallHolder(boolean startWithRinging, String number){
-            this.startWithRinging = startWithRinging;
-            this.number = number;
-        }
-
-
-    }
 }

@@ -31,7 +31,7 @@ public final class Constants {
 
     public static class DebugMode{
 
-        public static boolean FAKE_CONTACTS =true;
+        public static boolean FAKE_CONTACTS =false;
 
         public static boolean isAnyModeActive(){
             if (FAKE_CONTACTS)

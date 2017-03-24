@@ -22,4 +22,6 @@
     <!-- font sizes -->
     <dimen name="fs_normal">14dp</dimen>
     <dimen name="fab_margin">30dp</dimen>
+    <dimen name="search_contact_margin_right">8dp</dimen>
+    <dimen name="search_contact_margin_left">8dp</dimen>
 </resources>

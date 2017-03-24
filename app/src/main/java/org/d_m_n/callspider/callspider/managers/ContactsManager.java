@@ -72,7 +72,7 @@ public class ContactsManager {
             return null;
         }
         try {
-            List<ContactDb> ll= dbHelper.getContactDao().queryForEq("number", number);
+            List<ContactDb> ll= dbHelper.getContactDao().queryForEq("number", number.replace(" ", ""));
             if(ll != null) {
                 return Mapping.from(ll.get(0));
             }

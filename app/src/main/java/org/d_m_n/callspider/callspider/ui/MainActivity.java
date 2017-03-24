@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pager)
     protected ViewPager mViewPager;
 
-    @BindView(R.id.fab)
-    protected FloatingActionButton mFab;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -45,7 +45,7 @@ public final class ContactTools {
                     while (pCur.moveToNext()) {
                         NativeContact n = new NativeContact();
                         n.id = id;
-                        n.number = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                        n.number = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)).replace(" ", "");
                         n.name = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                         allContacts.add(n);
                         break;

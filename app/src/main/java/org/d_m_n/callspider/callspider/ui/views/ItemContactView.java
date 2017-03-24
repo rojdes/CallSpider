@@ -83,7 +83,7 @@ public class ItemContactView extends RelativeLayout implements View.OnClickListe
     }
 
     private void init(Context context) {
-        View v =inflate(context, R.layout.incl_item_contact_list, this);
+        View v =inflate(context, R.layout.item_contact_list, this);
         ButterKnife.bind(this,v);
         mivUp.setOnClickListener(this);
         mivDown.setOnClickListener(this);

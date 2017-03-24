@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
+        <EditText
+            android:id="@+id/et_contact_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:hint="@string/Enter_name_or_number"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/search_contact_margin_left"
+            android:layout_marginRight="@dimen/search_contact_margin_right"
+            android:textSize="@dimen/fs_normal"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_contact_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_contact_list">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_contact_list"
-        android:layout_below="@id/et_contact_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
 
-    </android.support.v7.widget.RecyclerView>
+        <ProgressBar
+            android:id="@+id/pb_contact_list"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_contact_list"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:indeterminate="true"
-        android:indeterminateBehavior="repeat"
-        android:visibility="gone" />
-
-    <EditText
-        android:id="@+id/et_contact_list"
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/fs_normal"
-        android:hint="@string/Enter_name_or_number"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_help"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/rv_contact_list"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="org.d_m_n.callspider.callspider.ui.views.fab.behavior.FabBehavior"/>
+</android.support.design.widget.CoordinatorLayout>
