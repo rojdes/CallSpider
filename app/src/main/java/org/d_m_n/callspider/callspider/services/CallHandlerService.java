@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import org.d_m_n.callspider.callspider.R;
 import org.d_m_n.callspider.callspider.app.Constants;
@@ -11,6 +12,7 @@ import org.d_m_n.callspider.callspider.app.Logger;
 import org.d_m_n.callspider.callspider.app.MainApp;
 import org.d_m_n.callspider.callspider.controllers.CallController;
 import org.d_m_n.callspider.callspider.managers.ContactsManager;
+import org.d_m_n.callspider.callspider.managers.PreferencesManager;
 import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
 import org.d_m_n.callspider.callspider.model.CommonContact;
 import org.d_m_n.callspider.callspider.ui.MainActivity;
@@ -25,8 +27,6 @@ public class CallHandlerService extends IntentService {
 
 
     private static final String TAG = CallHandlerService.class.getSimpleName();
-
-    private LastCallHolder mCallHolder;
 
     public CallHandlerService(String name) {
         super(name);
@@ -50,6 +50,7 @@ public class CallHandlerService extends IntentService {
     }
 
     private boolean isNeedEndCall(Intent intent, String number){
+        number = number.replace(" ", "");
         CommonContact cc= ContactsManager.with(this).getContactBy(number);
         Logger.e(TAG, "isNeedEndCall = " + String.valueOf(cc) + " " + " number = " +number);
         if(cc == null){
@@ -57,17 +58,25 @@ public class CallHandlerService extends IntentService {
         }
         switch (cc.direction){
             case FULL:
+                PreferencesManager.setLastNumber(null);
                 return true;
             case INCOMING:
-                mCallHolder = new LastCallHolder(true, number);
                 return intent.getAction().equals(Constants.Actions.CALL_RINGING);
-            case OUTGOING: //TODO CHECK with incoming call and then answering
-                if (mCallHolder != null && mCallHolder.startWithRinging && mCallHolder.number.equalsIgnoreCase(number)){
-                    mCallHolder = null;
-                    return  false;
+            case OUTGOING:
+                String lastIncomingNum = PreferencesManager.getLastNumber();
+                if (intent.getAction().equals(Constants.Actions.CALL_RINGING)){
+                    //starts incoming call
+                    PreferencesManager.setLastNumber(number);
+                    return false;
                 }
-                mCallHolder = null;
-                return intent.getAction().equals(Constants.Actions.CALL_OFFHOOK);
+                if (TextUtils.isEmpty(lastIncomingNum)){
+                    return intent.getAction().equals(Constants.Actions.CALL_OFFHOOK);
+                }
+                if (number.equalsIgnoreCase(lastIncomingNum)){
+                    PreferencesManager.setLastNumber(null);
+                    return false;
+                }
+                return false;
             case NOT_SET:
             default:
                 return false;

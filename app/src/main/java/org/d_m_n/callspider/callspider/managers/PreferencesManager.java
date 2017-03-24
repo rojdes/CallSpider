@@ -15,6 +15,7 @@ import org.d_m_n.callspider.callspider.app.MainApp;
 
 public final class PreferencesManager {
 
+    private static final String LAST_INCOMING_NUMBER = "last_incoming_number";
     private static SharedPreferences prefs;
     private static SharedPreferences.Editor editor;
 
@@ -74,4 +75,17 @@ public final class PreferencesManager {
         initPrefInstanceIfNeeded(MainApp.getAppContext());
         editor.putBoolean(PASSWORD_SET,state).apply();
     }
+
+    public static void setLastNumber(String number) {
+        initPrefInstanceIfNeeded(MainApp.getAppContext());
+        editor.putString(LAST_INCOMING_NUMBER ,number).apply();
+    }
+
+    public static String getLastNumber() {
+        initPrefInstanceIfNeeded(MainApp.getAppContext());
+        return prefs.getString(LAST_INCOMING_NUMBER ,"");
+    }
+
+
+
 }
