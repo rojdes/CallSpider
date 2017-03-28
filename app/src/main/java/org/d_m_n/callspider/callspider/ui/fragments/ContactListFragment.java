@@ -72,7 +72,7 @@ public class ContactListFragment extends BaseFragment{
         if (Constants.DebugMode.FAKE_CONTACTS){
             mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getFakeContacts());
             mrvContactList.setAdapter(mContactListAdapter);
-        } else if (PermissionManager.isPhonePermissionGranted(getActivity())) {
+        } else if (PermissionManager.isContactsPermissionsGranted(getActivity())) {
             mContactListAdapter = new ContactListAdapter(ContactsManager.with(getActivity()).getContacts());
             mrvContactList.setAdapter(mContactListAdapter);
         }
