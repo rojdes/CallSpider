@@ -80,7 +80,7 @@ public class ContactListFragment extends BaseFragment{
 
     @OnTextChanged(R.id.et_contact_list)
     public void onSearch(CharSequence text){
-        mContactListAdapter.filterWith(text);
+        mContactListAdapter.filterWith(text, mrvContactList);
     }
 
     @Override
