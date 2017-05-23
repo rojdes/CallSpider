@@ -18,10 +18,10 @@ import org.d_m_n.callspider.callspider.ui.MainActivity;
  * Created by dmytro.radchenko on 3/16/2017.
  */
 
-public final class SystemEventsService extends Service {
+public final class SystemEventsHandlerService extends Service {
 
 
-    private static final String TAG = SystemEventsService.class.getSimpleName();
+    private static final String TAG = SystemEventsHandlerService.class.getSimpleName();
     private ContactsContentObserver mContactsObserver;
 
     @Nullable

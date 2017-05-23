@@ -5,9 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.d_m_n.callspider.callspider.BuildConfig;
-import org.d_m_n.callspider.callspider.managers.PreferencesManager;
 import org.d_m_n.callspider.callspider.managers.UserNotifyManager;
-import org.d_m_n.callspider.callspider.services.SystemEventsService;
+import org.d_m_n.callspider.callspider.services.SystemEventsHandlerService;
 
 import butterknife.ButterKnife;
 
@@ -28,7 +27,7 @@ public class MainApp extends Application {
     public void onCreate() {
         super.onCreate();
         ButterKnife.setDebug(BuildConfig.DEBUG);
-        startService(new Intent(this, SystemEventsService.class));
+        startService(new Intent(this, SystemEventsHandlerService.class));
         sContext = this;
         notifyUserDebugModeEnabled();
     }

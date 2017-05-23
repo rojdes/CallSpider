@@ -34,7 +34,7 @@
             <!--</intent-filter>-->
         </receiver>
         <service android:name=".services.CallHandlerService"/>
-        <service android:name=".services.SystemEventsService" android:enabled="true" android:exported="true"/>
+        <service android:name=".services.SystemEventsHandlerService" android:enabled="true" android:exported="true"/>
     </application>
 
 </manifest>
